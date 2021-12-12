@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Shopper Style - Edit Profile</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href={{ url_for('static', filename='images/favicon.ico') }}>
+        <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/style.css') }} />
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    </head>
+
+
+
+    <body>
+
+        <header>
+
+            <a class="logo" href="/"><img id="logo" src= {{ url_for('static', filename='images/logo.png') }} /></a>
+
+            <nav>
+                <ul class="nav__links">
+                    {% for row in categoryData %}
+                        <li><a href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            {% if not loggedIn %}
+                <div id="signInButton">
+                    <a class="cta" href="/loginForm">Sign In</a>
+                </div>
+			{% else %}
+			<div class="dropdown">
+				<button class="cta">Hello,&nbsp;&nbsp;{{firstName}}</button>
+				<div class="dropdown-content">
+					<a href="/account/profile">Your profile</a>
+					<hr>
+					<a href="/logout">Sign Out</a>
+				</div>
+			</div>
+			{% endif %}
+                <div class="kart">
+                    <a href="/cart">
+                        <img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+                        &nbsp;{{noOfItems}}&nbsp;&nbsp;Items
+                    </a>
+                </div>
+
+            <p class="menu cta">Menu</p>
+
+        </header>
+
+
+
+        <div class="overlay">
+            <a class="close">&times;</a>
+            <div class="overlay__content">
+                {% for row in categoryData %}
+                    <a href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+        <div class="inner-body">
+            <h1>Edit Your Profile</h1>
+
+            <div class="formContainer">
+                <div class="formContentContainer">
+                    <form action="/updateProfile" method="POST">
+                        <table>
+                            <tr>
+                                <td><p>Email</p></td> <td><p><input type="email" name="email" value={{profileData[1]}} readonly="readonly"></p></td>
+                            </tr>
+                           <tr>
+                               <td><p>First Name</p></td> <td><p><input type="text" name="firstName" value={{profileData[2]}}></p></td>
+                            </tr>
+                            <tr>
+                                <td><p>Last Name</p></td> <td><p><input type="text" name="lastName" value={{profileData[3]}}></p></td>
+                            </tr>
+                            <tr>
+                                <td><p>Address 1</p></td> <td><p><input type="text" name="address1" value={{profileData[4]}}></p></td>
+                            </tr>
+                            <tr>
+                                <td><p>Address 2</p></td> <td><p><input type="text" name="address2" value={{profileData[5]}}></p></td>
+                            </tr>
+                            <tr>
+                                <td><p>Zip Code</p></td> <td><p><input type="text" name="zipcode" value={{profileData[6]}}></p></td>
+                            </tr>
+                            <tr>
+                                <td><p>City</p></td> <td><p><input type="text" name="city" value={{profileData[7]}}></p></td>
+                            </tr>
+                            <tr>
+                                <td><p>State</p></td> <td><p><input type="text" name="state" value={{profileData[8]}}></p></td>
+                            </tr>
+                            <tr>
+                                <td><p>Country</p></td> <td><p><input type="text" name="country" value={{profileData[9]}}></p></td>
+                            </tr>
+                            <tr>
+                                <td><p>Phone</p></td> <td><p><input type="text" name="phone" value={{profileData[10]}}></p></td>
+                            </tr>
+                            <tr>
+                               <td><p></p></td> <td><p><input class="ctas" type="submit" value="Save"></p></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            
+
+
+        </div>
+        <script type="text/javascript" src= {{ url_for('static', filename='js/mobile.js') }}></script>
+    </body>
+</html>

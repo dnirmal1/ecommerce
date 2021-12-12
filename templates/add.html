@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Shopper Style - Add Item</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/style.css') }} />
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    </head>
+
+
+
+    <body>
+
+        <header>
+
+            <a class="logo" href="/"><img id="logo" src= {{ url_for('static', filename='images/logo.png') }} /></a>
+
+            <nav>
+                <ul class="nav__links">
+                    {% for row in categoryData %}
+                        <li><a href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            {% if not loggedIn %}
+                <div id="signInButton">
+                    <a class="cta" href="/loginForm">Sign In</a>
+                </div>
+			{% else %}
+			<div class="dropdown">
+				<button class="cta">Hello,&nbsp;&nbsp;{{firstName}}</button>
+				<div class="dropdown-content">
+					<a href="/account/profile">Your profile</a>
+					<hr>
+					<a href="/logout">Sign Out</a>
+				</div>
+			</div>
+			{% endif %}
+                <div class="kart">
+                    <a href="/cart">
+                        <img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+                        &nbsp;{{noOfItems}}&nbsp;&nbsp;Items
+                    </a>
+                </div>
+
+            <p class="menu cta">Menu</p>
+
+        </header>
+
+
+
+        <div class="overlay">
+            <a class="close">&times;</a>
+            <div class="overlay__content">
+                {% for row in categoryData %}
+                    <a href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+        <div class="inner-body">
+            <h1>Add an Item</h1>
+
+            <div class="formContainer">
+                <div class="formContentContainer">
+                    <form id="input-form" action="/addItem" method="POST" enctype="multipart/form-data">
+                        <input type="text" name="name" placeholder="Name of Item"><br><br>
+                        <textarea name="description" rows=3 cols="40" placeholder="Description"></textarea><br><br>
+                        <input type="text" name="price" placeholder="Price"><br><br>
+                        <input type="text" name="stock" placeholder="Number of pieces"><br><br>
+                        <p>Upload an Image below!</p>
+                        <div class="custom-file-upload">
+                            <input type="file" name="image"><br><br>
+                            <label for="file">Upload Image</label>
+                        </div>
+                        <p>Choose from the given categories!</p><select name="category">
+                            {% for row in categories %}
+                                <option value="{{row[0]}}">{{row[1]}}</option>
+                            {% endfor %}
+                        </select><br><br>
+                        <input class="ctas" type="submit">
+                    </form>
+                </div>
+            </div>
+
+            
+
+
+        </div>
+        <script type="text/javascript" src= {{ url_for('static', filename='js/mobile.js') }}></script>
+    </body>
+</html>

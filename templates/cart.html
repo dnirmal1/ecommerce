@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Shopper Style - Cart</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href={{ url_for('static', filename='images/favicon.ico') }}>
+        <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/style.css') }} />
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    </head>
+
+
+
+    <body>
+
+        <header>
+
+            <a class="logo" href="/"><img id="logo" src= {{ url_for('static', filename='images/logo.png') }} /></a>
+
+            <nav>
+                <ul class="nav__links">
+                    {% for row in categoryData %}
+                        <li><a href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            {% if not loggedIn %}
+                <div id="signInButton">
+                    <a class="cta" href="/loginForm">Sign In</a>
+                </div>
+			{% else %}
+			<div class="dropdown">
+				<button class="cta">Hello,&nbsp;&nbsp;{{firstName}}</button>
+				<div class="dropdown-content">
+					<a href="/account/profile">Your profile</a>
+					<hr>
+					<a href="/logout">Sign Out</a>
+				</div>
+			</div>
+			{% endif %}
+                <div class="kart">
+                    <a href="/cart">
+                        <img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+                        &nbsp;{{noOfItems}}&nbsp;&nbsp;Items
+                    </a>
+                </div>
+
+            <p class="menu cta">Menu</p>
+
+        </header>
+
+
+
+        <div class="overlay">
+            <a class="close">&times;</a>
+            <div class="overlay__content">
+                {% for row in categoryData %}
+                    <a href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+        <div class="inner-body">
+            
+            <h1>Shopping Cart</h1>
+            <div id="tableItems">
+                {% for row in products %}
+                <div>
+                    <hr id="seperator">
+                    <div id="itemImage">
+                        <img src={{url_for('static', filename='uploads/'+row[3])}} id="image"/>
+                    </div>
+
+                    <div id="itemName">
+                        <span id="itemNameTag"><p><b>{{row[1]}}</b></p></span>
+                        <br>
+                        <p>${{row[2]}}&nbsp;&nbsp;In Stock</p>
+                        <br>
+                        <a class="ctar" href="/removeFromCart?productId={{row[0]}}">Remove</a>
+                    </div>
+
+                    <div id="itemPrice"></div>
+                </div>
+                {% endfor %}
+                <hr id="seperator">
+                <div id="total">
+                    <br>
+                    <span id="subtotal"><p>Subtotal  : ${{totalPrice}}</p></span>
+                    <br>
+                </div>
+            </div>
+            
+            <a class="ctas" href="/checkout">Proceed to checkout</a>
+            <br>
+            <br>
+
+
+        </div>
+        <script type="text/javascript" src= {{ url_for('static', filename='js/mobile.js') }}></script>
+    </body>
+</html>
