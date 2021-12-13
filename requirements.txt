@@ -101,7 +101,7 @@ testpath==0.4.4
 toml==0.10.2
 tornado==5.1.1
 traitlets==4.3.3
-ttystatus==0.38
+
 
 ufw==0.36
 unattended-upgrades==0.1
