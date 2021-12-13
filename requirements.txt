@@ -103,8 +103,8 @@ tornado==5.1.1
 traitlets==4.3.3
 
 
-ufw==0.36
-unattended-upgrades==0.1
+
+
 urllib3==1.25.8
 usb-creator==0.3.7
 virtualenv==20.10.0
