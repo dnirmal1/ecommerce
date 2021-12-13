@@ -1,3 +1,0 @@
-python-3.7.5
-flask
-GNU nano 4.3
