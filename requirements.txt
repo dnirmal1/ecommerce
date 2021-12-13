@@ -77,9 +77,8 @@ pyparsing==2.4.6
 pyRFC3339==1.1
 pyrsistent==0.15.5
 pytest==6.2.5
-python-apt==2.0.0+ubuntu0.20.4.6
 python-dateutil==2.7.3
-python-debian===0.1.36ubuntu1
+
 python-engineio==4.3.0
 python-socketio==5.5.0
 pytz==2019.3
@@ -88,7 +87,7 @@ PyYAML==5.3.1
 pyzmq==18.1.1
 reportlab==3.5.34
 requests==2.22.0
-requests-unixsocket==0.2.0
+
 SecretStorage==2.3.1
 Send2Trash==1.5.0
 simplejson==3.16.0
@@ -103,8 +102,7 @@ toml==0.10.2
 tornado==5.1.1
 traitlets==4.3.3
 ttystatus==0.38
-ubuntu-advantage-tools==27.4
-ubuntu-drivers-common==0.0.0
+
 ufw==0.36
 unattended-upgrades==0.1
 urllib3==1.25.8
